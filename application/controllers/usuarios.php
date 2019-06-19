@@ -11,11 +11,11 @@ class Usuarios extends CI_Controller {
 	{
         $dato['titulo'] = 'Controlador de Usuario';
         //cargando la vista
-		$this->load->view('usuarios/index.php', $dato);
+		$this->load->view('usuarios/index', $dato);
 	}
 
 	public function recargar(){
-		$data = ['usuarios' => $this->usuariosModel->getAll()];
-		$this->load->view('usuario/Tabla', $data);
+		$data = ['usuarios' => $this->UsuariosModel->getAll()];
+		$this->load->view('usuarios/tabla', $data);
 	}
 }
