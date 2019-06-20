@@ -30,12 +30,17 @@ function accion(params) {
     let nombre = document.getElementById('txtNombre').value;
     let apellido = document.getElementById('txtApellido').value;
     var peticion = new XMLHttpRequest();
+    if (nombre == '' && apellido == '') {
+        alert('estan vacios >:v');
+        return;
+    }
     console.log('entra a la funcion');
     peticion.onreadystatechange = function () { 
         console.log('se hace la peticion');
         if (this.readyState == 4) {
             document.getElementById('cuerpo').innerHTML = this.responseText;
             recargar();
+            limpiar();
         }
      };
      peticion.open('POST', 'usuarios/ingresar');
@@ -53,5 +58,6 @@ function eliminar(params) {
 }
 
 function limpiar() {
-    
+    document.getElementById('txtNombre').value = '';
+    document.getElementById('txtApellido').value = '';
 }
