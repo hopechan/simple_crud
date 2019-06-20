@@ -8,6 +8,16 @@
 </head>
 <body>
     <h1><?= $titulo ?></h1>
+    <div id="frm">
+        <h4>Nuevo Usuario</h4>
+        <input type="hidden" name="">
+        <input type="text" name="" id="txtNombre">
+        <input type="text" name="" id="txtApellido">
+        <button id="btn" value="Ingresar">Agregar</button>
+    </div>
+    <br>
+    <hr>
+    <br><br>
     <div>
         <table>
             <thead>
