@@ -36,4 +36,8 @@ class Usuarios extends CI_Controller {
 		$data = [$_POST['nombre'], $_POST['apellido'],$_POST['id']];
 		$this->UsuariosModel->update($data);
 	}
+
+	public function json(){
+		echo json_encode($this->UsuariosModel->getAll());
+	}
 }
