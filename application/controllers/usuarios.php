@@ -22,4 +22,18 @@ class Usuarios extends CI_Controller {
 		$data = [$_POST['nombre'], $_POST['apellido']];
 		$this->UsuariosModel->ingresar($data);
 	}
+
+	public function delete($id){
+		$this->UsuariosModel->delete($id);
+	}
+
+	public function getById($id){
+		$dato = ['usuario'=>$this->UsuariosModel->getById($id)];
+		$this->load->view('usuarios/form', $dato);
+	}
+
+	public function editar(){
+		$data = [$_POST['nombre'], $_POST['apellido'],$_POST['id']];
+		$this->UsuariosModel->update($data);
+	}
 }

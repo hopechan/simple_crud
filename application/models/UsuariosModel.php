@@ -10,6 +10,20 @@
             $sql = "INSERT INTO usuarios(nombre, apellido) VALUES (?, ?)";
             $this->db->query($sql, $datos);
         }
+
+        public function delete($id){
+            $this->db->query("DELETE FROM usuarios WHERE id = $id");
+        }
+
+        //getById
+        public function getById($id){
+            return $this->db->query("SELECT * FROM usuarios WHERE id = $id")->row();
+        }
+
+        public function update($data){
+            $sql = "UPDATE usuarios SET nombre = ?, apellido = ? WHERE id = ?";
+            $this->db->query($sql, $data);
+        }
     }
     
 ?>

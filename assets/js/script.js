@@ -2,9 +2,7 @@ window.addEventListener('load', recargar);
 
 function recargar() {
     var peticion = new XMLHttpRequest();
-    console.log('entra a la funcion');
     peticion.onreadystatechange = function () { 
-        console.log('se hace la peticion');
         if (this.readyState == 4) {
             document.getElementById('cuerpo').innerHTML = this.responseText;
             asignarEventos();
@@ -25,36 +23,56 @@ function asignarEventos() {
     }
 }
 
-function accion(params) {
-    console.log('boton agregar');
+function accion() {
+    var id = document.getElementById('id').value;
     let nombre = document.getElementById('txtNombre').value;
     let apellido = document.getElementById('txtApellido').value;
     var peticion = new XMLHttpRequest();
-    if (nombre == '' && apellido == '') {
+    if (nombre == '' || apellido == '') {
         alert('estan vacios >:v');
         return;
     }
-    console.log('entra a la funcion');
     peticion.onreadystatechange = function () { 
-        console.log('se hace la peticion');
         if (this.readyState == 4) {
             document.getElementById('cuerpo').innerHTML = this.responseText;
             recargar();
             limpiar();
+            document.getElementById('btn').value = 'Ingresar';
+            document.getElementById('btn').innerHTML = "Agregar";
         }
      };
-     peticion.open('POST', 'usuarios/ingresar');
+     var datos = `nombre=${nombre}&apellido=${apellido}`;
+     if (this.value == 'editar') {
+        datos += `&id=${id}`;
+     }
+     console.log(datos);
+     
+     peticion.open('POST', `usuarios/${this.value}`);
      peticion.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-     peticion.send(`nombre=${nombre}&apellido=${apellido}`);
-     console.log('se envio datos :v')
+     peticion.send(datos);
 }
 
-function actualizar(params) {
-    alert('boton actualizar');
+function actualizar() {
+    var peticion = new XMLHttpRequest();
+    peticion.onreadystatechange = function () { 
+        if (this.readyState == 4) {
+            document.getElementById('frm').innerHTML = this.responseText;
+            recargar();
+        }
+     };
+     peticion.open('GET', `usuarios/getById/${this.value}`);
+     peticion.send();
 }
 
-function eliminar(params) {
-    alert('boton eliminar');
+function eliminar() {
+    var peticion = new XMLHttpRequest();
+    peticion.onreadystatechange = function () { 
+        if (this.readyState == 4) {
+            recargar();
+        }
+     };
+     peticion.open('GET', `usuarios/delete/${this.value}`);
+     peticion.send();
 }
 
 function limpiar() {
